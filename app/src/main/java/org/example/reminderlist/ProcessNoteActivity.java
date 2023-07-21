@@ -23,8 +23,8 @@ public class ProcessNoteActivity extends AppCompatActivity {
         title = findViewById(R.id.txtNoteTitle);
         details = findViewById(R.id.txtNoteDetails);
 
-        pos = getIntent().getIntExtra("position",-1);
 
+        pos = getIntent().getIntExtra("position",-1);
 
         if (pos > -1){
             note = NoteStorage.getInstance().getNote(pos);
@@ -35,16 +35,18 @@ public class ProcessNoteActivity extends AppCompatActivity {
     }
 
     public void saveNoteClick(View view) {
-        if (pos == -1) {
+        if (pos > -1) {
+            note.setTitle(title.getText().toString());
+            note.setDetails(details.getText().toString());
+
+        } else {
             timestamp = Instant.now().getEpochSecond();
             Note note = new Note(title.getText().toString(), details.getText().toString(), timestamp);
             NoteStorage.getInstance().addNote(note);
-        } else {
-            note.setTitle(title.getText().toString());
-            note.setDetails(details.getText().toString());
         }
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

@@ -47,8 +47,9 @@ public class NoteViewAdapter extends RecyclerView.Adapter<NoteViewHolder>{
             public void onClick(View view) {
                 int pos = holder.getAdapterPosition();
                 Intent intent = new Intent(view.getContext(), ProcessNoteActivity.class);
-                intent.putExtra("position",pos);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 view.getContext().startActivity(intent);
+
             }
         });
     }

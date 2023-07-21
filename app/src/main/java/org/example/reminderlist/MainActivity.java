@@ -23,10 +23,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         storage = NoteStorage.getInstance();
+
         recyclerView = findViewById(R.id.rvNotesList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NoteViewAdapter(getApplicationContext(), storage.getNotes());
         recyclerView.setAdapter(adapter);
+
 
     }
 
@@ -36,16 +38,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sortTime(View view){
-       System.out.println("Sorting");
        NoteStorage.getInstance().sortNotesTime();
        adapter.notifyDataSetChanged();
     }
 
     public void sortAlph(View view){
-        System.out.println("Sorting_2");
         NoteStorage.getInstance().sortNotesLetter();
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResume() {
 
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
 }

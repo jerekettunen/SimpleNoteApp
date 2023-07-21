@@ -7,6 +7,7 @@ public class NoteStorage {
     private static NoteStorage singleton;
 
     private NoteStorage() {
+        ;
     }
     public static NoteStorage getInstance() {
         if (singleton == null) {
